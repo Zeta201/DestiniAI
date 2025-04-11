@@ -1,0 +1,60 @@
+# Python cache and bytecode files
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+
+# Virtual environment folders
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# PyCharm or JetBrains specific files
+.idea/
+
+# VSCode specific files
+.vscode/
+
+# MacOS specific files
+.DS_Store
+
+# Linux specific files
+*.swp
+*~
+
+# TensorBoard logs
+runs/
+
+# PyTorch model files (large weights) — optionally, you might want to add specific model files here
+*.pth
+*.pt
+
+# Hugging Face model files (for large models if you're using them)
+cache/
+
+# Logs and temp files
+*.log
+*.bak
+*.swp
+*.tmp
+
+# Requirements files
+*.txt
+
+# Example folder with datasets (you can adjust this)
+data/
+
+# Output directories for generated data (e.g., graph construction, embeddings)
+output/
+
+# Caches for PyTorch Geometric (or other large dependencies)
+torch_geometric_cache/
+
+# Python Wheels
+*.whl
