@@ -1,16 +1,16 @@
-# 🧠 DestiniGNN: GNN-Based User Recommendation Microservice
+# DestiniGNN: GNN-Based User Recommendation Microservice
 
 This is the **Graph Neural Network (GNN)**-based recommendation microservice used in the broader _Destini_ dating platform. It computes personalized user recommendations based on profile attributes and relationship compatibility using graph learning techniques.
 
 ---
 
-## 📌 Overview
+## Overview
 
 This microservice builds a user graph from profile features (e.g., interests, MBTI, goals, etc.), computes embeddings using a GNN (GraphSAGE), and generates top-N personalized match recommendations. It exposes a FastAPI-based REST API for other services (e.g., frontend, feedback engine) to consume.
 
 ---
 
-## 🔧 Tech Stack
+## Tech Stack
 
 - Python 3.10+
 - [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/)
@@ -25,7 +25,7 @@ This microservice builds a user graph from profile features (e.g., interests, MB
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-org/DestiniGNN.git
+git clone https://github.com/Zeta201/DestiniGNN.git
 cd DestiniGNN
 ```
 
@@ -72,7 +72,6 @@ Returns a list of recommended user profiles.
     "similarity_score": 0.89,
     "matched_on": ["MBTI", "goal", "interests"]
   },
-  ...
 ]
 ```
 
