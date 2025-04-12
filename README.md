@@ -1,33 +1,46 @@
-# DestiniGNN: GNN-Based User Recommendation Microservice
+# DestiniGNN: GNN & SVDpp-Based User Recommendation Microservices
 
-This is the **Graph Neural Network (GNN)**-based recommendation microservice used in the broader _Destini_ dating platform. It computes personalized user recommendations based on profile attributes and relationship compatibility using graph learning techniques.
+This repository contains **two key recommendation microservices** used in the broader *Destini* dating platform:
+
+1. **Graph Neural Network (GNN)** service
+2. **Collaborative Filtering using SVD++**
+
+Both services provide personalized user match recommendations and are queried independently by the orchestrator via API.
 
 ---
 
 ## Overview
 
-This microservice builds a user graph from profile features (e.g., interests, MBTI, goals, etc.), computes embeddings using a GNN (GraphSAGE), and generates top-N personalized match recommendations. It exposes a FastAPI-based REST API for other services (e.g., frontend, feedback engine) to consume.
+### 1. GNN-Based Recommendation
+
+This service builds a user graph from profile features (e.g., interests, MBTI, goals, etc.), computes embeddings using a GNN (GraphSAGE), and generates top-N match recommendations.
+
+### 2. SVD++ Collaborative Filtering
+
+This service builds a collaborative filtering model using implicit feedback from user likes and negative samples, and computes similarity scores based on user interactions. It supports mutual interest recommendations.
 
 ---
 
 ## How This Fits Into the Bigger System
 
-This is **one of several microservices** in the Destini ecosystem. Other services (not in this repo):
+This repo contains **two of several microservices** in the Destini ecosystem:
 
-- `DestiniColab`: Colaborative filtering engine
-- `DestiniRL`: Reinforcement Learning based feedback refiner
+- `DestiniColab` ✅ (this repo) – Collaborative filtering engine (SVD++)
+- `DestiniGNN` ✅ (this repo) – GNN-based profile matching
+- `DestiniRL`: Reinforcement Learning-based feedback refiner
 - `DestiniVision`: Vision model for profile photo-based embedding
 - `DestiniOrchestrator`: Central blackboard controller to merge multiple recommendation sources
 
-This GNN service runs independently but is queried by the orchestrator via API.
+Each microservice runs independently and is queried by the orchestrator.
 
 ---
 
 ## Tech Stack
 
 - Python 3.10+
-- [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/)
-- Sentence Transformers (for text embeddings)
+- [PyTorch Geometric](https://pytorch-geometric.readthedocs.io/) (GNN model)
+- [Surprise Library](http://surpriselib.com/) (SVD++ model)
+- Sentence Transformers (text embeddings)
 - FastAPI (API layer)
 - NumPy, Scikit-learn, Pandas
 
@@ -46,7 +59,7 @@ cd DestiniGNN
 
 ```bash
 chmod +x install.sh
-./ install.sh
+./install.sh
 ```
 
 ### 3. Run the service
@@ -57,16 +70,16 @@ python app.py
 
 By default, it:
 
-- Loads `gnn_model.pt` if it exists
+- Loads `gnn_model.pt` or `svd_model.pkl` if available
 - Otherwise trains from scratch and saves the model
 
 ---
 
 ## 🔗 API Reference
 
-### `POST /recommend`
+### `POST /recommend` (GNN)
 
-Returns a list of recommended user profiles.
+Returns GNN-based recommended user profiles.
 
 **Request Body:**
 
@@ -79,39 +92,64 @@ Returns a list of recommended user profiles.
 **Response:**
 
 ```json
+{
   "recommendations": [
     {
       "age": 33,
       "name": "Brian Green",
-      "similarity_score": 0.9845097064971924,
+      "similarity_score": 0.9845,
       "user_id": 734
     },
     {
       "age": 40,
       "name": "Willie Steele",
-      "similarity_score": 0.9843288660049438,
+      "similarity_score": 0.9843,
       "user_id": 382
-    },
-    {
-      "age": 31,
-      "name": "Charles Martinez",
-      "similarity_score": 0.9841940402984619,
-      "user_id": 698
-    },
-    {
-      "age": 33,
-      "name": "Robert Knight",
-      "similarity_score": 0.9841533899307251,
-      "user_id": 412
-    },
-]
+    }
+  ]
+}
 ```
+
+---
+
+### `POST /recommend/svd` (Collaborative Filtering)
+
+Returns user recommendations based on implicit feedback using SVD++.
+
+**Request Body:**
+
+```json
+{
+  "user_id": 10
+}
+```
+
+**Response:**
+
+```json
+{
+  "recommendations": [
+    {
+      "user_id": 10,
+      "profile_id": 23,
+      "similarity_score": 0.9112
+    },
+    {
+      "user_id": 10,
+      "profile_id": 41,
+      "similarity_score": 0.8749
+    }
+  ]
+}
+```
+
 ---
 
 ## Model Persistence
 
-- Trained models are saved at: `saved_models/gnn_model.pt`
-- On restart, the service automatically loads the saved model to avoid retraining
+- GNN model saved at: `saved_models/gnn_model.pt`
+- SVD++ model saved at: `saved_models/svd_model.pkl`
+- Both services automatically load saved models if available
 
 ---
 
@@ -120,3 +158,4 @@ Returns a list of recommended user profiles.
 MIT © 2025
 
 ---
+
