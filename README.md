@@ -66,15 +66,33 @@ Returns a list of recommended user profiles.
 **Response:**
 
 ```json
-[
-  {
-    "user_id": 42,
-    "similarity_score": 0.89,
-    "matched_on": ["MBTI", "goal", "interests"]
-  },
+  "recommendations": [
+    {
+      "age": 33,
+      "name": "Brian Green",
+      "similarity_score": 0.9845097064971924,
+      "user_id": 734
+    },
+    {
+      "age": 40,
+      "name": "Willie Steele",
+      "similarity_score": 0.9843288660049438,
+      "user_id": 382
+    },
+    {
+      "age": 31,
+      "name": "Charles Martinez",
+      "similarity_score": 0.9841940402984619,
+      "user_id": 698
+    },
+    {
+      "age": 33,
+      "name": "Robert Knight",
+      "similarity_score": 0.9841533899307251,
+      "user_id": 412
+    },
 ]
 ```
-
 ---
 
 ## Model Persistence
