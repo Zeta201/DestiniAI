@@ -10,6 +10,19 @@ This microservice builds a user graph from profile features (e.g., interests, MB
 
 ---
 
+## How This Fits Into the Bigger System
+
+This is **one of several microservices** in the Destini ecosystem. Other services (not in this repo):
+
+- `DestiniColab`: Colaborative filtering engine
+- `DestiniRL`: Reinforcement Learning based feedback refiner
+- `DestiniVision`: Vision model for profile photo-based embedding
+- `DestiniOrchestrator`: Central blackboard controller to merge multiple recommendation sources
+
+This GNN service runs independently but is queried by the orchestrator via API.
+
+---
+
 ## Tech Stack
 
 - Python 3.10+
@@ -99,21 +112,6 @@ Returns a list of recommended user profiles.
 
 - Trained models are saved at: `saved_models/gnn_model.pt`
 - On restart, the service automatically loads the saved model to avoid retraining
-
----
-
-## How This Fits Into the Bigger System
-
-This is **one of several microservices** in the Destini ecosystem. Other services (not in this repo):
-
-- `DestiniColab`: Colaborative filtering engine
-- `DestiniRL`: Reinforcement Learning based feedback refiner
-- `DestiniVision`: Vision model for profile photo-based embedding
-- `DestiniOrchestrator`: Central blackboard controller to merge multiple recommendation sources
-
-This GNN service runs independently but is queried by the orchestrator via API.
-
----
 
 ---
 
