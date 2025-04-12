@@ -1,4 +1,4 @@
-# DestiniGNN: GNN & SVDpp-Based User Recommendation Microservices
+# DestiniAI: AI-Based User Recommendation Microservices
 
 This repository contains **two key recommendation microservices** used in the broader *Destini* dating platform:
 
