@@ -32,8 +32,8 @@ cd DestiniGNN
 ### 2. Setup environment
 
 ```bash
-chmod +x setup.sh
-./ setup.sh
+chmod +x install.sh
+./ install.sh
 ```
 
 ### 3. Run the service
