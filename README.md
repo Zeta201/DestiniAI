@@ -25,7 +25,7 @@ This microservice builds a user graph from profile features (e.g., interests, MB
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-org/DestiniGNN.git
+git clone https://github.com/Zeta201/DestiniGNN.git
 cd DestiniGNN
 ```
 
