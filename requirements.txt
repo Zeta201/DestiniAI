@@ -1,0 +1,14 @@
+numpy<2
+torch==2.5.0
+torchvision
+torchaudio
+sentence-transformers
+transformers
+pandas
+scikit-learn
+matplotlib
+surprise
+faker
+torch_geometric
+flask
+torch-sparse @ https://data.pyg.org/whl/torch-2.5.0+cu121.html
